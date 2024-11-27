@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6 side-image">
+                <img src="/img/login/1.png" alt="Imagen">
+                <div class="text">
+                    <p>La Pildora <i>- Pharmacy</i></p>
+                </div>
+            </div>
+
+            <div class="col-md-6 right">
+                <div class="input-box">
+                    <header>La Pildora | Login</header>
+                    <form action="/auth/login" method="POST">
+                        <div class="input-field">
+                            <input type="text" class="input" name="email" id="email" required autocomplete="off">
+                            <label for="email">Email</label> 
+                        </div> 
+                        <div class="input-field">
+                            <input type="password" class="input" name="password" id="password" required>
+                            <label for="password">Password</label>
+                        </div> 
+                        <div class="input-field">
+                            <input type="submit" class="submit" value="Iniciar Sesión">
+                        </div> 
+                    </form>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
