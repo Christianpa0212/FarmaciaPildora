@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import { logout } from '../controllers/authController.js';
+import { logout } from '../../controllers/login/authController.js';
 
 const router = express.Router();
 
@@ -19,7 +19,7 @@ router.post('/login', passport.authenticate('local', {
     } else if (req.user.role === 'supervisor') {
         res.redirect('/supervisor');
     } else {
-        res.redirect('/empleado');
+        res.redirect('/employees');
     }
 });
 
