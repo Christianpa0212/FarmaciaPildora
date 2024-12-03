@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Empleado</title>
+    <link rel="stylesheet" href="/css/dash.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <label class="logo">Farmacia "La Píldora"</label>
+        <a href="/" class="navbar-logo">
+            <img src="/img/admin/dashboard/logo.png" alt="Logo">
+        </a>
+        <ul>
+            <li><a href="/employee/dashboard" class="active">Inicio</a></li>
+            <li><a href="/employee/ventas">Ventas</a></li>
+            <li><a href="/employee/profile">Perfil</a></li>
+            <li><a href="/auth/logout">logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección Principal -->
+    <section class="hero-section">
+        <div class="card-container">
+            <div class="card" onclick="window.location.href='/admin/dashboard/users'">
+                <div class="card-background" style="background-image: url('/img/admin/dashboard/1.png');"></div>
+                <div class="content">
+                    <div class="card-category">Registra | Edita | Elimina</div>
+                    <h3 class="card-heading">-PERFIL-</h3>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='/admin/ventas'">
+                <div class="card-background" style="background-image: url('/img/admin/dashboard/2.png');"></div>
+                <div class="content">
+                    <div class="card-category">Registra | Edita | Elimina</div>
+                    <h3 class="card-heading">-VENTAS-</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

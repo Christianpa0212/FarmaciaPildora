@@ -1,0 +1,195 @@
+/* Configuración general */
+body {
+    background-color: #2e2e2e; /* Fondo gris oscuro */
+    color: #f5f5f5; /* Texto gris claro */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+    margin-top: 100px; /* Ajusta el margen según el alto de tu navbar */
+    margin-left: 47px;
+    width: 90%;
+    padding: 20px;
+    background-color: #3c3c3c; /* Contenedor gris más claro */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos para el formulario */
+.form-add-product {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-add-product input,
+.form-add-product select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #4c4c4c; /* Gris más claro */
+    color: #f5f5f5;
+    flex: 1 1 calc(33% - 10px); /* Ajuste flexible para distribuir los campos */
+    min-width: 200px;
+}
+
+.form-add-product button {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #5a5a5a; /* Gris intermedio */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1 1 100%; /* El botón ocupa toda la fila */
+}
+
+.form-add-product button:hover {
+    background-color: #6a6a6a; /* Gris más claro */
+}
+
+/* Tabla de productos */
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.products-table th,
+.products-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #555;
+}
+
+.products-table th {
+    background-color: #4c4c4c; /* Encabezados gris claro */
+}
+
+.products-table tbody tr:nth-child(odd) {
+    background-color: #404040; /* Filas impares gris oscuro */
+}
+
+.products-table tbody tr:nth-child(even) {
+    background-color: #505050; /* Filas pares gris intermedio */
+}
+
+/* Botones en las acciones */
+.inline-form {
+    display: inline-block;
+    margin: 0;
+}
+
+.inline-form button {
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.inline-form button:hover {
+    background-color: #666;
+}
+
+:root {
+    --shadow: 0 5px 10px 0 rgba(0, 0, 0, .3);
+    --navColor: linear-gradient(to right, #b2935b 5%, #373737);
+}
+
+/* Estilos de la Navbar */
+nav {
+    position: fixed; /* Fija la navbar en la parte superior */
+    top: 0;
+    left: 0;
+    background: var(--navColor);
+    box-shadow: var(--shadow);
+    height: 80px;
+    width: 100%;
+    z-index: 1000; /* Asegura que siempre esté encima del contenido */
+}
+
+/* Título de la Navbar */
+label.logo {
+    color: #373737;
+    font-size: 30px;
+    line-height: 80px;
+    padding: 0 80px;
+    letter-spacing: -1px;
+    font-weight: 800;
+    font-style: italic;
+    transition: .2s ease;
+    text-shadow: 3px 5px 20px #b2935b;
+}
+
+/* Logo en el centro de la Navbar */
+.navbar-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navbar-logo img {
+    height: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    width: auto;
+    background: none; /* Evita cualquier fondo */
+    border: none; /* Evita cualquier borde */
+    transition: none; /* Elimina transiciones */
+    pointer-events: auto; /* Asegura que se pueda hacer clic en el logo */
+}
+
+/* Estilos de los enlaces de la Navbar */
+nav ul {
+    float: right;
+    margin-right: 80px;
+}
+
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+}
+
+nav ul li a {
+    color: #ced1cf;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 13px;
+    text-transform: lowercase;
+}
+
+a.active, nav ul li a:hover {
+    background: #b2935b;
+    transition: .5s;
+}
+
+.action-button {
+    padding: 5px 10px;
+    color: #fff;
+    background-color: #6c757d;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #5a6268;
+}

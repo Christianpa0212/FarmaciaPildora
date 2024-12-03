@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="/css/products.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Producto</h1>
+        <form action="/admin/dashboard/products/update/{{product._id}}" method="POST" class="form-add-product">
+            <input type="text" name="name" value="{{product.name}}" placeholder="Nombre del Producto" required>
+            <input type="text" name="classification" value="{{product.classification}}" placeholder="Clasificación" required>
+            <input type="text" name="supplier" value="{{product.supplier}}" placeholder="Proveedor" required>
+            <input type="number" name="purchasePrice" value="{{product.purchasePrice}}" placeholder="Precio de Compra" required>
+            <input type="number" name="salePrice" value="{{product.salePrice}}" placeholder="Precio de Venta" required>
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    </div>
+</body>
+</html>
