@@ -1,0 +1,182 @@
+:root {
+    --shadow: 0 5px 10px 0 rgba(0, 0, 0, .3);
+    --navColor: linear-gradient(to right, #b2935b  5%, #373737);
+}
+
+/* Reseteo de estilos */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+/* Estilos de la Navbar */
+nav {
+    position: absolute;
+    background: var(--navColor);
+    box-shadow: var(--shadow);
+    height: 80px;
+    width: 100%;
+}
+
+/* Título de la Navbar */
+label.logo {
+    color: #373737;
+    font-size: 30px;
+    line-height: 80px;
+    padding: 0 80px;
+    letter-spacing: -1px;
+    font-weight: 800;
+    font-style: italic;
+    transition: .2s ease;
+    text-shadow: 3px 5px 20px #b2935b;
+}
+
+/* Logo en el centro de la Navbar */
+.navbar-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navbar-logo img {
+    height: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    width: auto;
+    background: none; /* Evita cualquier fondo */
+    border: none; /* Evita cualquier borde */
+    transition: none; /* Elimina transiciones */
+    pointer-events: auto; /* Asegura que se pueda hacer clic en el logo */
+}
+
+/* Estilos de los enlaces de la Navbar */
+nav ul {
+    float: right;
+    margin-right: 80px;
+}
+
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+}
+
+nav ul li a {
+    color: #ced1cf;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 13px;
+    text-transform: lowercase;
+}
+
+a.active, nav ul li a:hover {
+    background: #b2935b;
+    transition: .5s;
+}
+
+/* Desactiva cualquier efecto de hover en el logo */
+.navbar-logo:hover,
+.navbar-logo img:hover {
+    background: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+}
+/* Section*/
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100%;
+}
+
+.hero-section {
+    display: flex;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: #373737;
+}
+
+.card-container {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    list-style: none;
+    gap: 30px;
+    width: 220px;
+    transition: .3s ease;
+}
+
+.card::before {
+    content: "";
+    display: block;
+    padding-bottom: 150%;
+    width: 100%;
+}
+
+.card-background {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    border-radius: 20px;
+    background-position: center;
+    filter: brightness(.9) saturate(1) contrast(1);
+    transform-origin: bottom;
+    transform: scale(1) translateZ(0);
+    transition: .3s ease;
+}
+
+.card:hover .card-background {
+    transform: scale(1.15) translateZ(0);
+    background-size: 260px;
+}
+
+.card-container:hover > .card:not(:hover) {
+    transform: scale(.9);
+}
+
+.card-container:hover > .card:not(:hover) .card-background,
+.card-container:hover > .card:not(:hover) .card-category {
+    filter: brightness(.5) saturate(0) contrast(1.2) blur(20px);
+}
+
+.content {
+    top: 50%;
+    left: 0;
+    padding: 25px;
+    position: absolute;
+}
+
+.card-category {
+    color: #373737;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.card-heading {
+    color: #ced1cf;
+    font-size: 25px;
+    line-height: 1;
+    text-shadow: 2px 2px 20px #373737;
+}
+
