@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="/css/products.css">
+
+</head>
+<body>
+   <nav>
+        <label class="logo">Farmacia "La Píldora"</label>
+        <a href="/admin" class="navbar-logo">
+            <img src="/img/admin/dashboard/logo.png" alt="Logo">
+        </a>
+        <ul>
+            <li><a href="/admin" class="active">Inicio</a></li>
+            <li><a href="/admin/dashboard/sales">Ventas</a></li>
+            <li><a href="/admin/dashboard/orders">Pedidos</a></li>
+            <li><a href="/admin/dashboard/inventory">Inventario</a></li>
+            <li><a href="/admin/dashboard/users">Usuarios</a></li>
+            <li><a href="/auth/logout">logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Productos | Farmacia 'La Pildora' | Admin</h1>
+
+        <!-- Formulario para añadir un producto -->
+        <form action="/admin/dashboard/products/create" method="POST" class="form-add-product">
+            <input type="text" name="name" placeholder="Nombre del Producto" required>
+            
+            <!-- Selector dinámico para clasificación -->
+            <select name="classification" required>
+                {{#each classifications}}
+                <option value="{{name}}">{{name}}</option>
+                {{/each}}
+            </select>
+            
+            <!-- Selector dinámico para proveedor -->
+            <select name="supplier" required>
+                {{#each suppliers}}
+                <option value="{{name}}">{{name}}</option>
+                {{/each}}
+            </select>
+            
+            <input type="number" name="purchasePrice" placeholder="Precio de Compra" required>
+            <input type="number" name="salePrice" placeholder="Precio de Venta" required>
+            <button type="submit">Añadir Producto</button>
+        </form>
+
+        <!-- Tabla para mostrar los productos -->
+        <table class="products-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Clasificación</th>
+                    <th>Proveedor</th>
+                    <th>Precio Compra</th>
+                    <th>Precio Venta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{classification}}</td>
+                    <td>{{supplier}}</td>
+                    <td>${{purchasePrice}}</td>
+                    <td>${{salePrice}}</td>
+                    <td>
+    <!-- Enlace para editar -->
+
+                       <a href="/admin/dashboard/products/edit/{{_id}}" class="action-button">Editar</a>
+
+
+                        <!-- Formulario para eliminar -->
+                        <form action="/admin/dashboard/products/delete/{{_id}}" method="POST" class="inline-form">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
