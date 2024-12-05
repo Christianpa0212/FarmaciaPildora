@@ -27,7 +27,7 @@
         <h1>Productos | Farmacia 'La Pildora' | Admin</h1>
 
         <!-- Formulario para añadir un producto -->
-        <form action="/admin/dashboard/products/create" method="POST" class="form-add-product">
+        <form action="/admin/dashboard/inventory/products/create" method="POST" class="form-add-product">
             <input type="text" name="name" placeholder="Nombre del Producto" required>
             
             <!-- Selector dinámico para clasificación -->
@@ -72,11 +72,11 @@
                     <td>
     <!-- Enlace para editar -->
 
-                       <a href="/admin/dashboard/products/edit/{{_id}}" class="action-button">Editar</a>
+                       <a href="/admin/dashboard/inventory/products/edit/{{_id}}" class="action-button">Editar</a>
 
 
                         <!-- Formulario para eliminar -->
-                        <form action="/admin/dashboard/products/delete/{{_id}}" method="POST" class="inline-form">
+                        <form action="/admin/dashboard/inventory/products/delete/{{_id}}" method="POST" class="inline-form">
                             <button type="submit">Eliminar</button>
                         </form>
                     </td>

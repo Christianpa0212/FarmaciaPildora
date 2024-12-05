@@ -1,0 +1,210 @@
+/* General Styles */
+:root {
+    --dark-bg: #2d2f36;
+    --dark-card: #3c4048;
+    --light-text: #f2f2f2;
+    --button-hover: #5c5f66;
+    --border-color: #4a4d54;
+    --shadow: 0 5px 10px 0 rgba(0, 0, 0, .3);
+    --navColor: linear-gradient(to right, #b2935b  5%, #373737);
+}
+
+/* Body Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+/* Container for Orders */
+.cont {
+    margin-top: 50px;
+    margin-left: 50px;
+    max-width: 1200px;
+    padding: 20px;
+    background: var(--dark-card);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Header Section */
+.container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.container .header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: var(--light-text);
+}
+
+/* Table Styling */
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.orders-table th, .orders-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.orders-table th {
+    background-color: var(--dark-card);
+    color: var(--light-text);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 16px;
+}
+
+.orders-table td {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.orders-table tr:hover {
+    background-color: var(--button-hover);
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Action Buttons */
+.action-button {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: var(--light-text);
+    background-color: var(--dark-card);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: var(--button-hover);
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-badge.pending {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.status-badge.accepted {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.status-badge.rejected {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.status-badge.received {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .orders-table th, .orders-table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .container .header h1 {
+        font-size: 20px;
+    }
+}
+
+
+/* Estilos de la Navbar */
+nav {
+    position: static;
+    background: var(--navColor);
+    box-shadow: var(--shadow);
+    height: 80px;
+    width: 100%;
+}
+
+/* Título de la Navbar */
+label.logo {
+    color: #373737;
+    font-size: 30px;
+    line-height: 80px;
+    padding: 0 80px;
+    letter-spacing: -1px;
+    font-weight: 800;
+    font-style: italic;
+    transition: .2s ease;
+    text-shadow: 3px 5px 20px #b2935b;
+}
+
+/* Logo en el centro de la Navbar */
+.navbar-logo {
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navbar-logo img {
+    position: static;
+    margin-top: 10px;
+    margin-left: 120px;
+    height: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    width: auto;
+    background: none; /* Evita cualquier fondo */
+    border: none; /* Evita cualquier borde */
+    transition: none; /* Elimina transiciones */
+    pointer-events: auto; /* Asegura que se pueda hacer clic en el logo */
+}
+
+/* Estilos de los enlaces de la Navbar */
+nav ul {
+    float: right;
+    margin-right: 80px;
+}
+
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+}
+
+nav ul li a {
+    color: #ced1cf;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 13px;
+    text-transform: lowercase;
+}
+
+a.active, nav ul li a:hover {
+    background: #b2935b;
+    transition: .5s;
+}
+
+/* Desactiva cualquier efecto de hover en el logo */
+.navbar-logo:hover,
+.navbar-logo img:hover {
+    background: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+}
