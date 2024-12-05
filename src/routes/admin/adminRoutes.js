@@ -3,6 +3,7 @@ import { isAdmin } from '../../middlewares/login/authMiddleware.js';
 import inventoryRoutes from './inventory/inventoryRoutes.js';
 import orderRoutes from './orders/orderRoutes.js';
 import userRoutes from './users/userRoutes.js';
+import saleRoutes from './sales/saleRoutes.js';
 
 const router = express.Router(); // Crea una instancia del enrutador de Express.
 
@@ -26,7 +27,7 @@ router.get('/', isAdmin, (req, res) => {
 router.use('/dashboard/inventory', inventoryRoutes);
 router.use('/dashboard/orders', orderRoutes);
 router.use('/dashboard/users' , userRoutes);
-
+router.use('/dashboard/sales' , saleRoutes);
 
 // Middleware para capturar errores globalmente.
 router.use((err, req, res, next) => {

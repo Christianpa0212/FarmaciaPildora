@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Venta | Empleado</title>
+    <link rel="stylesheet" href="/css/orderinfo.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalles de la Venta</h1>
+        <p><strong>Número de Venta:</strong> {{sale.saleNumber}}</p>
+        <p><strong>Vendedor:</strong> {{sale.seller}}</p>
+        <p><strong>Sucursal:</strong> {{sale.branch}}</p>
+        <p><strong>Total:</strong> ${{sale.total}}</p>
+        <p><strong>Fecha de Creación:</strong> {{formatDate sale.creationDate}}</p>
+
+        <h2>Productos</h2>
+        <table class="products-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each sale.products}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{quantity}}</td>
+                    <td>${{price}}</td>
+                    <td>${{calcTotal quantity price}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <a href="/employees/dashboard/sales" class="button back">Regresar</a>
+    </div>
+</body>
+</html>

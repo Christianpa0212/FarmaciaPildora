@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas | Empleado</title>
+    <link rel="stylesheet" href="/css/orders.css">
+</head>
+<body>
+    <nav>
+        <label class="logo">Farmacia "La Píldora"</label>
+        <a href="/employees" class="navbar-logo">
+            <img src="/img/admin/dashboard/logo.png" alt="Logo">
+        </a>
+        <ul>
+            <li><a href="/employees" class="active">Inicio</a></li>
+            <li><a href="/employees/dashboard/sales">Ventas</a></li>
+            <li><a href="/employees/dashboard/inventory">Inventario</a></li>
+            <li><a href="/auth/logout">logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="cont">
+        <div class="header">
+            <h1>Ventas</h1>
+            <a href="/employees/dashboard/sales/create" class="action-button">Nueva Venta</a>
+        </div>
+
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Número de Venta</th>
+                    <th>Vendedor</th>
+                    <th>Sucursal</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each sales}}
+                <tr>
+                    <td>{{saleNumber}}</td>
+                    <td>{{seller}}</td>
+                    <td>{{branch}}</td>
+                    <td>${{total}}</td>
+                    <td>{{formatDate creationDate}}</td>
+                    <td>
+                        <a href="/employees/dashboard/sales/{{_id}}" class="action-button">Detalles</a>
+                        <a href="/employees/dashboard/sales/generate-pdf/{{_id}}" class="action-button">PDF</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

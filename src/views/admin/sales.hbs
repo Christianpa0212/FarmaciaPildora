@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario | Farmacia "La Pildora"</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/inventory.css"> <!-- Archivo CSS dedicado -->
+    <link rel="stylesheet" href="/css/dash.css">
+</head>
+<body>
+    {{!-- Navbar --}}
+    <nav>
+        <label class="logo">Farmacia "La Píldora"</label>
+        <a href="/admin" class="navbar-logo">
+            <img src="/img/admin/dashboard/logo.png" alt="Logo">
+        </a>
+        <ul>
+            <li><a href="/admin" class="active">Inicio</a></li>
+            <li><a href="/admin/dashboard/sales">Ventas</a></li>
+            <li><a href="/admin/dashboard/orders">Pedidos</a></li>
+            <li><a href="/admin/dashboard/inventory">Inventario</a></li>
+            <li><a href="/admin/dashboard/users">Usuarios</a></li>
+            <li><a href="/auth/logout">logout</a></li>
+        </ul>
+    </nav>
+
+    <div id="card-area">
+        <div class="wrapper">
+            <div class="box-area"> 
+                {{!-- Tarjetas de las sucursales --}}
+                <div class="box">
+                    <img src="/img/admin/inventory/1.png" alt="Sucursal Norte">
+                    <div class="overlay">
+                        <h3>Sucursal Norte</h3>
+                        <p>Direccion: Avenida Lindavista #89A <br>
+                            Colonia: Niños Heroes <br>
+                            Ciudad: Guadalajara
+                        </p>
+                        <a href="/admin/dashboard/sales/branch/norte">Ver Ventas</a>
+                    </div>
+                </div>
+                
+                <div class="box">
+                    <img src="/img/admin/inventory/2.png" alt="Sucursal Centro">
+                    <div class="overlay">
+                        <h3>Sucursal Centro</h3>
+                       <p>Direccion: Avenida Constituyentes #517 <br>
+                            Colonia: Zona Centro <br>
+                            Ciudad: Guadalajara
+                        </p>
+                        <a href="/admin/dashboard/sales/branch/centro">Ver Ventas</a>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <img src="/img/admin/inventory/3.png" alt="Sucursal Sur">
+                    <div class="overlay">
+                        <h3>Sucursal Sur</h3>
+                        <p>Direccion: Avenida Adolfo Lopez Mateos #32B <br>
+                            Colonia: Zona Centro <br>
+                            Ciudad: Guadalajara
+                        </p>
+                        <a href="/admin/dashboard/sales/branch/sur">Ver Ventas</a>
+                    </div>
+                </div>
+            </div>  
+        </div>   
+    </div>
+</body>
+</html>
