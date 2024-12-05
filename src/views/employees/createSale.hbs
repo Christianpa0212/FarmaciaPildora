@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Venta | Supervisor</title>
+    <link rel="stylesheet" href="/css/orderinfo.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">Crear Nueva Venta</h1>
+        <div class="seller-info">
+            <p><strong>Vendedor:</strong> {{seller}}</p>
+            <p><strong>Sucursal:</strong> {{branch}}</p>
+            <p><strong>Número de Venta:</strong> {{generatedSaleNumber}}</p>
+        </div>
+
+        <!-- Formulario para agregar productos -->
+        <div class="product-selection">
+            <h2>Agregar Productos</h2>
+            <form id="add-product-form">
+                <label for="product">Producto:</label>
+                <select id="product" name="product">
+                    {{#each products}}
+                    <option value="{{id}}" data-name="{{name}}" data-classification="{{classification}}" data-price="{{salePrice}}">
+                        {{name}} ({{supplier}}) - ${{salePrice}}
+                    </option>
+                    {{/each}}
+                </select>
+
+                <label for="quantity">Cantidad:</label>
+                <input type="number" id="quantity" name="quantity" min="1" placeholder="Cantidad" required>
+
+                <!-- Campos para medicamentos controlados -->
+                <div id="controlled-medicine-fields">
+                    <h3>Detalles de Receta Médica</h3>
+                    <label for="patientName">Nombre del Paciente:</label>
+                    <input type="text" id="patientName" name="patientName" placeholder="Nombre del Paciente">
+
+                    <label for="doctorName">Nombre del Médico:</label>
+                    <input type="text" id="doctorName" name="doctorName" placeholder="Nombre del Médico">
+
+                    <label for="medicalLicense">Cédula Médica:</label>
+                    <input type="text" id="medicalLicense" name="medicalLicense" placeholder="Cédula Médica">
+
+                    <label for="doctorNumber">Número de Medico:</label>
+                    <input type="number" id="doctorNumber" name="doctorNumber" placeholder="Número de Prescripción">
+
+                </div>
+
+                <button type="button" id="add-product-button" class="button add">Añadir Producto</button>
+            </form>
+        </div>
+
+        <!-- Tabla de productos añadidos -->
+        <h2>Productos Añadidos</h2>
+        <table id="added-products-table" class="products-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Productos añadidos dinámicamente aquí -->
+            </tbody>
+        </table>
+
+        <!-- Botones de acciones -->
+        <form action="/employees/dashboard/sales/create" method="POST" id="create-sale-form">
+            <input type="hidden" name="seller" value="{{seller}}">
+            <input type="hidden" name="branch" value="{{branch}}">
+            <input type="hidden" name="saleNumber" value="{{generatedSaleNumber}}">
+            <input type="hidden" name="products" id="products-input">
+            <button type="submit" class="button accept">Crear Venta</button>
+            <a href="/employees/dashboard/sales" class="button back">Cancelar</a>
+        </form>
+    </div>
+
+    <script>
+const productsInput = document.getElementById("products-input");
+const productsTableBody = document.getElementById("added-products-table").querySelector("tbody");
+let addedProducts = [];
+
+// Añadir producto al arreglo y la tabla
+document.getElementById("add-product-button").addEventListener("click", () => {
+    const productSelect = document.getElementById("product");
+    const selectedOption = productSelect.options[productSelect.selectedIndex];
+    const id = selectedOption.value;
+    const name = selectedOption.getAttribute("data-name");
+    const price = parseFloat(selectedOption.getAttribute("data-price"));
+    const quantity = parseInt(document.getElementById("quantity").value);
+
+    // Validar cantidad
+    if (!quantity || quantity <= 0) {
+        return alert("Ingrese una cantidad válida.");
+    }
+
+    // Recopilar detalles opcionales
+    const product = {
+        id,
+        name,
+        quantity,
+        price,
+        total: quantity * price,
+        details: {
+            patientName: document.getElementById("patientName").value.trim() || null,
+            doctorName: document.getElementById("doctorName").value.trim() || null,
+            medicalLicense: document.getElementById("medicalLicense").value.trim() || null,
+            doctorNumber: document.getElementById("doctorNumber").value.trim() || null,
+        },
+    };
+
+    // Añadir el producto al arreglo
+    addedProducts.push(product);
+    productsInput.value = JSON.stringify(addedProducts); // Actualizar el campo oculto con el JSON
+
+    // Agregar fila a la tabla
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${quantity}</td>
+        <td>${price.toFixed(2)}</td>
+        <td>${(quantity * price).toFixed(2)}</td>
+        <td>
+            <button type="button" class="remove-product-button">Eliminar</button>
+        </td>
+    `;
+
+    // Agregar evento al botón de eliminar
+    row.querySelector(".remove-product-button").addEventListener("click", () => {
+        const index = Array.from(productsTableBody.children).indexOf(row);
+        addedProducts.splice(index, 1);
+        productsInput.value = JSON.stringify(addedProducts); // Actualizar el JSON
+        row.remove(); // Eliminar la fila de la tabla
+    });
+
+    productsTableBody.appendChild(row);
+
+    // Limpiar formulario
+    document.getElementById("quantity").value = "";
+    document.querySelectorAll("#controlled-medicine-fields input").forEach((input) => (input.value = ""));
+});
+
+    </script>
+</body>
+</html>
