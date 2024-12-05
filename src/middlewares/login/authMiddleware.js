@@ -29,7 +29,7 @@ export const isEmployee = (req, res, next) => {
   }
   res.status(403).send('Acceso denegado: No tienes permisos de empleado.'); 
 };
-
+ 
 // Middleware específico para verificar si es supervisor
 export const isSupervisor = (req, res, next) => {
   if (req.isAuthenticated() && req.user.role === 'supervisor') {

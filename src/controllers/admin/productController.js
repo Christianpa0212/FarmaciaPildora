@@ -78,7 +78,7 @@ export const createProduct = async (req, res) => {
     });
 
     await newProduct.save();
-    res.redirect('/admin/dashboard/products'); // Redirige a la página de productos
+    res.redirect('/admin/dashboard/inventory/products'); // Redirige a la página de productos
   } catch (error) {
     console.error("Error al crear producto:", error);
     res.status(400).send("Error al crear el producto.");
@@ -101,7 +101,7 @@ export const updateProduct = async (req, res) => {
       return res.status(404).json({ error: "Producto no encontrado para actualizar." });
     }
 
-    res.redirect('/admin/dashboard/products'); // Redirige a la página de productos
+    res.redirect('/admin/dashboard/inventory/products'); // Redirige a la página de productos
   } catch (error) {
     console.error("Error al actualizar producto:", error);
     res.status(400).send("Error al actualizar el producto.");
@@ -115,7 +115,7 @@ export const deleteProduct = async (req, res) => {
     if (!product) {
       return res.status(404).send('Producto no encontrado');
     }
-    res.redirect('/admin/dashboard/products');
+    res.redirect('/admin/dashboard/inventory/products');
   } catch (error) {
     console.error('Error al eliminar el producto:', error);
     res.status(500).send('Error interno al eliminar el producto');
