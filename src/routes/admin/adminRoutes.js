@@ -1,59 +1,37 @@
 import express from 'express';
-import multer from 'multer';
-import path from 'path';
-import { getAllUsers, createUser, updateUser, deleteUser, getUserById } from '../../controllers/admin/userController.js';
-import { isAdmin } from '../../middlewares/login/authMiddleware.js';
-import productRoutes from './productRoutes.js';
-import orderRoutes from './orderRoutes.js';
-const router = express.Router();
+import { isAdmin } from '../../middlewares/login/authMiddleware.js'; 
+import inventoryRoutes from './inventory/inventoryRoutes.js';
+import orderRoutes from './orders/orderRoutes.js';
+import userRoutes from './users/userRoutes.js';
 
-// Modularización de configuración de Multer
-const storage = (folder) =>
-  multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, `public/img/${folder}`); // Directorio dinámico según entidad
-    },
-    filename: (req, file, cb) => {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      cb(null, uniqueSuffix + path.extname(file.originalname));
-    },
-  });
+const router = express.Router(); // Crea una instancia del enrutador de Express.
 
-const uploadEmployees = multer({ storage: storage('employees') });
+router.use(isAdmin);
 
-// Validación global de IDs en rutas dinámicas
+// *** Validación Global de IDs ***
+// Middleware que valida si el ID en las rutas es válido antes de procesarlo.
 router.param('id', (req, res, next, id) => {
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-    return res.status(400).json({ error: 'ID inválido.' });
+  if (!id.match(/^[0-9a-fA-F]{24}$/)) { // Verifica si el ID tiene el formato correcto de MongoDB.
+    return res.status(400).json({ error: 'ID inválido.' }); // Devuelve un error si no es válido.
   }
-  next();
+  next(); // Si es válido, continúa al siguiente middleware o controlador.
 });
 
-// Rutas de productos
-router.use('/dashboard/products', productRoutes);
-router.use('/dashboard/orders', orderRoutes);
-
-// Ruta para renderizar la vista de inventario
-router.get('/dashboard/inventory', (req, res) => {
-  res.render('admin/inventory', { layout: false }); // Renderiza la vista "inventory.hbs"
-});
-
-// Ruta para renderizar el dashboard principal
+// Ruta para renderizar el dashboard principal del admin.
 router.get('/', isAdmin, (req, res) => {
-  res.render('admin/dashboard', { layout: false });
+  res.render('admin/dashboard', { layout: false }); // Renderiza la vista "dashboard.hbs".
 });
 
-// CRUD para usuarios
-router.get('/dashboard/users', isAdmin, getAllUsers); // Obtener todos los usuarios
-router.get('/dashboard/users/:id', isAdmin, getUserById); // Obtener un usuario por ID
-router.post('/dashboard/users', isAdmin, uploadEmployees.single('picture'), createUser); // Crear un usuario
-router.patch('/dashboard/users/update/:id', isAdmin, uploadEmployees.single('picture'), updateUser); // Actualizar un usuario
-router.delete('/dashboard/users/delete/:id', isAdmin, deleteUser); // Eliminar un usuario
+// *** Rutas Delegadas ***
+router.use('/dashboard/inventory', inventoryRoutes);
+router.use('/dashboard/orders', orderRoutes);
+router.use('/dashboard/users' , userRoutes);
 
-// Manejo global de errores
+
+// Middleware para capturar errores globalmente.
 router.use((err, req, res, next) => {
-  console.error('Error detectado:', err.stack);
-  res.status(500).json({ error: 'Ocurrió un error interno. Por favor, inténtelo de nuevo más tarde.' });
+  console.error('Error detectado:', err.stack); // Muestra el error en consola para depuración.
+  res.status(500).json({ error: 'Ocurrió un error interno. Por favor, inténtelo de nuevo más tarde.' }); // Devuelve un error genérico al cliente.
 });
 
 export default router;

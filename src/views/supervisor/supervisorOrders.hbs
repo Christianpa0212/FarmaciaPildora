@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos | Supervisor</title>
+    <link rel="stylesheet" href="/css/suporders.css">
+</head>
+<body>
+    <nav>
+        <label class="logo">Farmacia "La Píldora"</label>
+        <a href="/supervisor" class="navbar-logo">
+            <img src="/img/admin/dashboard/logo.png" alt="Logo">
+        </a>
+        <ul>
+            <li><a href="/supervisor" class="active">Inicio</a></li>
+            <li><a href="/supervisor/dashboard/orders">Pedidos</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Pedidos</h1>
+        <a href="/supervisor/dashboard/orders/create" class="action-button">Nuevo Pedido</a>
+
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Número de Pedido</th>
+                    <th>Supervisor</th>
+                    <th>Sucursal</th>
+                    <th>Total</th>
+                    <th>Fecha de Creación</th>
+                    <th>Fecha de Recepción</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                <tr>
+                    <td>{{orderNumber}}</td>
+                    <td>{{supervisorName}}</td>
+                    <td>{{branch}}</td>
+                    <td>${{total}}</td>
+                    <td>{{formatDate creationDate}}</td>
+                    <td>{{#if receptionDate}}{{formatDate receptionDate}}{{else}}Pendiente{{/if}}</td>
+                    <td>
+                        <span class="status-badge {{status}}">{{status}}</span>
+                    </td>
+                    <td>
+                        {{#if (eq status 'pendiente')}}
+                        <a href="/supervisor/dashboard/orders/{{_id}}" class="action-button">Detalles</a>
+                        {{else if (eq status 'rechazado')}}
+                            <a href="/supervisor/dashboard/orders/{{_id}}" class="action-button">Detalles</a>
+                        {{else if (eq status 'aceptado')}}
+                            <a href="/supervisor/dashboard/orders/{{_id}}" class="action-button">Detalles</a>
+                        {{else if (eq status 'recibido')}}
+                            <a href="/supervisor/dashboard/orders/generate-pdf/{{_id}}" class="action-button">PDF</a>
+                            <a href="/supervisor/dashboard/orders/{{_id}}" class="action-button">Detalles</a>
+                        {{/if}}
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

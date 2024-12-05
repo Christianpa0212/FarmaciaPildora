@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario | Administrador</title>
+    <link rel="stylesheet" href="/css/orders.css">
+</head>
+<body>
+    <nav>
+        <label class="logo">Farmacia "La Píldora"</label>
+        <a href="/admin" class="navbar-logo">
+            <img src="/img/admin/dashboard/logo.png" alt="Logo">
+        </a>
+        <ul>
+            <li><a href="/admin" class="active">Inicio</a></li>
+            <li><a href="/admin/dashboard/inventory">Inventario</a></li>
+            <li><a href="/admin/dashboard/users">Usuarios</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="cont">
+        <div class="header">
+            <h1>Inventario - Sucursal {{branch}}</h1>
+        </div>
+
+        <table class="orders-table">
+                <thead>
+                    <tr>
+                    <th>Producto</th>
+                    <th>Proveedor</th>
+                    <th>Cantidad</th>
+                    <th>Fecha de Caducidad</th>
+                    <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each inventory}}
+                    <tr>
+                    <td>{{name}}</td>
+                    <td>{{supplier}}</td>
+                    <td>{{quantity}}</td>
+                    <td>{{formatDate expirationDate}}</td>
+                    <td>${{salePrice}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+                </table>
+
+    </div>
+</body>
+</html>

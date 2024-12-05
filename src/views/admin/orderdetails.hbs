@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Pedido | Admin</title>
+    <link rel="stylesheet" href="/css/orderinfo.css">
+</head>
+<body>
+
+
+    <div class="container">
+        <h1 class="page-title">Detalles del Pedido</h1>
+        <div class="order-details">
+            <p><strong>Número de Pedido:</strong> {{order.orderNumber}}</p>
+            <p><strong>Supervisor:</strong> {{order.supervisorName}}</p>
+            <p><strong>Sucursal:</strong> {{order.branch}}</p>
+            <p><strong>Total:</strong> ${{order.total}}</p>
+            <p><strong>Fecha de Creación:</strong> {{formatDate order.creationDate}}</p>
+            <p><strong>Fecha de Recepción:</strong> {{#if order.receptionDate}}{{formatDate order.receptionDate}}{{else}}Pendiente{{/if}}</p>
+            <p><strong>Estatus:</strong> <span class="status {{order.status}}">{{order.status}}</span></p>
+        </div>
+
+        <h2>Productos</h2>
+        <table class="products-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each order.products}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{quantity}}</td>
+                    <td>${{price}}</td>
+                    <td>${{calcTotal quantity price}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <div class="actions">
+            {{#ifCond order.status 'pendiente'}}
+            <form action="/admin/dashboard/orders/{{order._id}}/status" method="POST" class="action-form">
+                <input type="hidden" name="status" value="aceptado">
+                <button type="submit" class="button accept">Aceptar</button>
+            </form>
+
+            <form action="/admin/dashboard/orders/{{order._id}}/status" method="POST" class="action-form">
+                <input type="hidden" name="status" value="rechazado">
+                <button type="submit" class="button reject">Rechazar</button>
+            </form>
+            {{else}}
+            <div class="info-message">
+                <p>Este pedido no puede ser modificado.</p>
+            </div>
+            {{/ifCond}}
+
+            <a href="/admin/dashboard/orders" class="button back">Regresar a Pedidos</a>
+        </div>
+    </div>
+</body>
+</html>
