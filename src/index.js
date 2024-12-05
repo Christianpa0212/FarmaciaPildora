@@ -11,7 +11,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
 import moment from 'moment';
-import methodOverride from 'method-override';
+
 
 // Cargar variables de entorno
 dotenv.config();
@@ -22,14 +22,16 @@ connectDB();
 // Crear instancia de Express
 const app = express();
 
-// Configuración de Handlebars como motor de plantillas
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
+
 // Middleware para manejar datos JSON y formularios
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(methodOverride('_method'));
+
+// Configuración de Handlebars como motor de plantillas
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.engine('hbs', engine({
   extname: '.hbs',
@@ -40,11 +42,47 @@ app.engine('hbs', engine({
   layoutsDir: path.join(__dirname, 'views', 'layouts'),
   defaultLayout: false,
   helpers: {
-    formatDate: (date) => moment(date).format('DD-MM-YYYY'), // Helper para formatear fechas
-    eq: (a, b) => a === b, // Helper para comparar valores
-    or: (a, b) => a || b // Helper para evaluar si una de las dos condiciones es verdadera
+    // Formatear fechas
+    formatDate: (date) => moment(date).format('DD-MM-YYYY'), 
+
+    // Compara dos valores (igualdad estricta)
+    eq: (a, b) => a === b, 
+
+    // Operador lógico OR
+    or: (a, b) => a || b, 
+
+    // Calcular el total de un producto
+    calcTotal: (quantity, price) => (quantity * price).toFixed(2), 
+
+    // Evaluar condiciones con operadores personalizados
+    ifCond: function (v1, v2, options) {
+      if (typeof v1 === 'undefined' || typeof v2 === 'undefined') {
+        return options.inverse(this); // Si alguna variable es undefined, ejecuta el bloque else
+      }
+      if (v1 === v2) {
+        return options.fn(this); // Si los valores coinciden, ejecuta el bloque if
+      }
+      return options.inverse(this); // De lo contrario, ejecuta el bloque else
+    },
+
+    // Comparación con operadores personalizados
+    compare: function (v1, operator, v2, options) {
+      switch (operator) {
+        case '==': return (v1 == v2) ? options.fn(this) : options.inverse(this);
+        case '===': return (v1 === v2) ? options.fn(this) : options.inverse(this);
+        case '<': return (v1 < v2) ? options.fn(this) : options.inverse(this);
+        case '<=': return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+        case '>': return (v1 > v2) ? options.fn(this) : options.inverse(this);
+        case '>=': return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+        case '&&': return (v1 && v2) ? options.fn(this) : options.inverse(this);
+        case '||': return (v1 || v2) ? options.fn(this) : options.inverse(this);
+        default: return options.inverse(this);
+      }
+    },
   },
 }));
+
+
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
